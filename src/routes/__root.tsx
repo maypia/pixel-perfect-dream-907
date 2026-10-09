@@ -13,6 +13,7 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { SiteHeader } from "@/components/SiteHeader";
+import { SessionProvider, SessionStartBoundary } from "@/state/SessionProvider";
 
 function NotFoundComponent() {
   return (
@@ -116,10 +117,14 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
+      <SessionProvider>
+      <SessionStartBoundary>
       <div className="flex min-h-screen flex-col">
         <SiteHeader />
         <Outlet />
       </div>
+      </SessionStartBoundary>
+      </SessionProvider>
     </QueryClientProvider>
   );
 }

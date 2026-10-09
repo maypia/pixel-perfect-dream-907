@@ -14,6 +14,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as HowToRouteImport } from './routes/how-to'
 import { Route as IdeasRouteImport } from './routes/ideas'
+import { Route as ScanRouteImport } from './routes/scan'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -40,6 +41,11 @@ const IdeasRoute = IdeasRouteImport.update({
   path: '/ideas',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScanRoute = ScanRouteImport.update({
+  id: '/scan',
+  path: '/scan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -47,6 +53,7 @@ export interface FileRoutesByFullPath {
   '/categories': typeof CategoriesRoute
   '/how-to': typeof HowToRoute
   '/ideas': typeof IdeasRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -54,6 +61,7 @@ export interface FileRoutesByTo {
   '/categories': typeof CategoriesRoute
   '/how-to': typeof HowToRoute
   '/ideas': typeof IdeasRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -62,13 +70,15 @@ export interface FileRoutesById {
   '/categories': typeof CategoriesRoute
   '/how-to': typeof HowToRoute
   '/ideas': typeof IdeasRoute
+  '/scan': typeof ScanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/categories' | '/how-to' | '/ideas'
+  fullPaths: '/' | '/about' | '/categories' | '/how-to' | '/ideas' | '/scan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/categories' | '/how-to' | '/ideas'
-  id: '__root__' | '/' | '/about' | '/categories' | '/how-to' | '/ideas'
+  to: '/' | '/about' | '/categories' | '/how-to' | '/ideas' | '/scan'
+  id:
+    '__root__' | '/' | '/about' | '/categories' | '/how-to' | '/ideas' | '/scan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -77,6 +87,7 @@ export interface RootRouteChildren {
   CategoriesRoute: typeof CategoriesRoute
   HowToRoute: typeof HowToRoute
   IdeasRoute: typeof IdeasRoute
+  ScanRoute: typeof ScanRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -116,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IdeasRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scan': {
+      id: '/scan'
+      path: '/scan'
+      fullPath: '/scan'
+      preLoaderRoute: typeof ScanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -125,6 +143,7 @@ const rootRouteChildren: RootRouteChildren = {
   CategoriesRoute: CategoriesRoute,
   HowToRoute: HowToRoute,
   IdeasRoute: IdeasRoute,
+  ScanRoute: ScanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

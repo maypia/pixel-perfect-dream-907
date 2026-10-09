@@ -106,3 +106,23 @@
   animation: page-in 0.5s ease both;
 }
 @keyframes page-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+
+/* Additional pages share the existing Home palette and fonts. */
+.category-card, .concept-card { transition: transform .25s ease, box-shadow .25s ease; }
+.category-card:hover, .concept-card:hover { transform: translateY(-4px); box-shadow: 0 8px 0 -3px color-mix(in oklab, var(--foreground) 12%, transparent); }
+.category-card:disabled:hover { transform: none; box-shadow: none; }
+.geometric-art { flex-shrink: 0; }
+.portrait-frame::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18;
+  background-image: radial-gradient(var(--muted-foreground) .6px, transparent .7px);
+  background-size: 5px 7px;
+}
+@media (max-width: 639px) {
+  .about-intro { min-height: 420px; align-items: flex-start; }
+  .about-intro > div { max-width: 100%; padding-top: 16px; padding-bottom: 140px; }
+  .about-cover { object-fit: contain; object-position: right bottom; height: 170px; top: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .category-card, .concept-card, .category-card .geometric-art { transition: none; }
+  .category-card:hover, .concept-card:hover { transform: none; }
+}
